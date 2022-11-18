@@ -15,6 +15,14 @@
         <requirement type="package" version="2.4.2">r-remotes</requirement>
         <requirement type="package" version="2.0.4">r-dggridr</requirement>
     </expand>
+    <required_files>
+        <include type="literal" path="test-data/occ_at.tabular"/>
+        <include type="literal" path="test-data/Index.csv"/>
+        <include type="literal" path="analyze.r"/>
+        <include type="literal" path="visualize.r"/>
+        <include type="literal" path="data.r"/>
+        <include type="literal" path="obisindicators.r"/>
+    </required_files>
     <command detect_errors="exit_code"><![CDATA[
         Rscript
             '$__tool_directory__/obisindicators.r'
@@ -56,7 +64,7 @@
         </collection>
     </outputs>
     <tests>
-        <test>
+        <test expect_num_outputs="2">
             <param name="input" value="occ_at.tabular"/>
             <param name="colnames" value="true"/>
             <param name="separator" value="t"/>
