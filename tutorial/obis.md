@@ -43,7 +43,7 @@ This first step consist of downloading and properly prepare the data to use it i
 
 > <hands-on-title>Hands-on: Data upload</hands-on-title>
 >
-> 1. Create a new history for this tutorial and give it a name (example: “Sentinel 2 data for biodiversity tutorial”) for you to find it again later if needed.
+> 1. Create a new history for this tutorial and give it a name (example: “Obisindicators tutorial”) for you to find it again later if needed.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 >
@@ -78,7 +78,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >   Data ready
 > <hand-on-title>Hands-on: Obis</hand-on-title>H
 >
-> 1. {% tool [Preprocessing sentinel 2 data](SRS_preprocess_S2) %} with the following parameters:
+> 1. {% tool [Ocean biodiversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input data"*: `sentinel_2_data.zip` (Input dataset)
 >    - {% icon param-select %} *"Where does your data come from ?"*: 'From Scihub or Peps'
 >
