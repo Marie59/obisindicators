@@ -4,14 +4,9 @@ layout: tutorial_hands_on
 title: Obis marine indicators
 zenodo_link: ''
 questions:
-- How to get spectral and biodiversity indicators from remote sensing data ?
-- Which kind of ecosystem are you studying ? global or canopy data ?
 objectives:
-- Getting Sentinel 2 data and reformating them in a generalize way
-- Computing spectral indices such as the NDVI
 - Calculating and vizualizing biodiversity indicators
-- Comparing with in-situ data 
-time_estimation: 2H
+time_estimation: 1H
 key_points:
 - Marine data
 - Diversity indicators
@@ -22,7 +17,6 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
 
 OBIS is a global open-access data and information clearing-house on marine biodiversity for science, conservation and sustainable development. In order to visualize their marine data OBIS created the package obisindicators.
 
@@ -33,7 +27,7 @@ This tool for obisindicators is composed of 5 indicators : Number of record, Sha
 
 In this tutorial, we'll be working on obis data extracted from .  First those data will be prepared. 
 
->
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -47,7 +41,7 @@ In this tutorial, we'll be working on obis data extracted from .  First those da
 
 This first step consist of downloading and properly prepare the data to use it in Sentinel 2 toolsuite.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Hands-on: Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a name (example: “Sentinel 2 data for biodiversity tutorial”) for you to find it again later if needed.
 >
@@ -65,7 +59,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >
 > 3. Upload the zip folder
 >
->     > ### {% icon tip %} Tip: Importing data from your computer
+>     > <tip-title>Tip: Importing data from your computer</tip-title>
 >     >
 >     > * Open the Galaxy Upload Manager {% icon galaxy-upload %}
 >     > * Select **Choose local files**
@@ -82,7 +76,7 @@ This first step consist of downloading and properly prepare the data to use it i
 # obisinticators tool
 >
 >   Data ready
-> ### {% icon hands_on %} Hands-on: Obis
+> <hand-on-title>Hands-on: Obis</hand-on-title>H
 >
 > 1. {% tool [Preprocessing sentinel 2 data](SRS_preprocess_S2) %} with the following parameters:
 >    - {% icon param-file %} *"Input data"*: `sentinel_2_data.zip` (Input dataset)
@@ -100,14 +94,14 @@ The Shannon index expresses the uncertainty associated with the prediction of th
 Warning: OBIS uses records as a proxy for individuals and sampling is generally not random, the community is not infinitely large and not all species are represented in the sample.
 
 The Shannon diversity index, also known as the Shannon-Wiener diversity index, is defined in OBIS as the sum over all species of -fi*log(fi) with fi defined as n/ni with n as the total number of records in the raster cell and ni as the total number of records for the ith-species in the raster cell.
-> ![Preprocessing outputs](images/preproc.png "Preprocessing outputs")
+![Preprocessing outputs](images/preproc.png "Preprocessing outputs")
 
 
-> ### {% icon question %} Question
+> <question-title>Question</question-title>
 >
 > 1. What are the files you are interested in for the folowing tools ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title>Solution</solution-title>
 > >
 > > 1. The 2 files in the **Refelectance** folder that finish by "_Refl" and "_Refl.hdr"
 > >
@@ -159,7 +153,6 @@ Warning: The Simpson index has the same assumptions as the Shannon index.
 
 
 # Conclusion
-{:.no_toc}
 
 You are now all set to use your obis data in order to do a diversity analysis.
 
