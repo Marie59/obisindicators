@@ -54,7 +54,7 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >    ![Obis portal](../../images/obisindicators/portal.png "Obis portal")
 >
 >     > <details-title>Download data on the obis portal</details-title>
->     > * Go on the right panel and enter the criteria of your choise here in "Area" write down **Atlantic** and select "South Atlantic Ocean".
+>     > * Go on the right panel and enter the criteria of your choise here in "Area" write down **Mediterranean** and select "France: Mediterranean Sea".
 >     > * Click on save on the top right
 >     > ![Obis download](../../images/obisindicators/download.png "Obis download")
 >     > * Then on the 3 green lines top right press download
@@ -62,7 +62,7 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >     > ![Obis waiting](../../images/obisindicators/waiting.png "Waiting download")
 >     > * The download can take a while depending on the size of your dataset (here less than 15min) 
 >     > * Then click on **Download ZIP file**
->     > * Don't forget too unzip your file on your machine 
+>     > * Don't forget to unzip your file on your machine 
 >     {: .details}
 >
 > In the downloaded folder you should have your data either csv format (Occurence.csv) and you must have at least 4 columns containing: latitude, longitude, species and record.
@@ -87,6 +87,24 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >
 {: .hands_on}
 
+## Convert data **csv-to-tabular**
+
+> <hands-on-title>Convert your data</hands-on-title>
+>
+> 1. {% tool [csv-to-tabular](csv_to_tabular) %} with the following parameters:
+>
+>    
+{: .hands_on}
+
+## Clean data **Advanced Cut**
+
+> <hands-on-title>Clean your data</hands-on-title>
+>
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `c['1', '3', '4', '9', '95']`
+>
+{: .hands_on}
 
 ## **Ocean biodiversity indicators**
 
@@ -94,21 +112,21 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >
 > 1. {% tool [Ocean biodiversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1) %} with the following parameters:
 >    - *"What character is the separator in your data? (Mostlikely a comma for a csv file and t for a tabular)"*: `Tabulator (\t)`
->    - *"Select column containing the decimal value of the longitude "*: `c1`
->    - *"Select column containing the decimal value of the latitude "*: `c2`
->    - *"Select column containing the species "*: `c3`
+>    - *"Select column containing the decimal value of the longitude "*: `c2`
+>    - *"Select column containing the decimal value of the latitude "*: `c3`
+>    - *"Select column containing the species "*: `c4`
 >    - *"Select column containing the number of records"*: `c5`
 >
->    ***TODO***: *Check parameter descriptions*
 >
 > 2. Click on **Execute** 
 > 3. You will see 5 outputs appear on the history pannel. one for each of the indicators
 >
 {: .hands_on}
 
-## Records
+## Number of records
 
-![Records](../../images/obisindicators/records.png "Records map")
+![Records map ](../../images/obisindicators/records.png "Records map")
+In the table index the records correspond to n.
 
 ## Shannon
 
@@ -151,11 +169,11 @@ The expected number of marine species in a random sample of 50 individuals (reco
 The ES50 is defined in OBIS as the sum(esi) over all species of the following per species calculation:
 
     when n - ni >= 50 (with n as the total number of records in the cell and ni the total number of records for the ith-species)
-        esi = 1 - exp(lngamma(n-ni+1) + lngamma(n-50+1) - lngamma(n-ni-50+1) - lngamma(n+1))
+        $$ esi = 1 - exp(lngamma(n-ni+1) + lngamma(n-50+1) - lngamma(n-ni-50+1) - lngamma(n+1)) $$
     when n >= 50
-        esi = 1
+        $$ esi = 1 $$
     else
-        esi = NULL
+        $$ esi = NULL $$
 
 Warning: ES50 assumes that individuals are randomly distributed, the sample size is sufficiently large, the samples are taxonomically similar, and that all of the samples have been taken in the same manner.
 ![ES50](../../images/obisindicators/es50.png "ES50 map")
@@ -163,6 +181,7 @@ Warning: ES50 assumes that individuals are randomly distributed, the sample size
 
 ## Maxp
 
+Maxp is the maximum of the total number of records for the ith-species ni divided by the total number of records in the cell n, ie, $$ Maxp = max(ni / n) $$.
 ![Maxp](../../images/obisindicators/maxp.png "Maxp map")
 
 ## Hill
@@ -179,11 +198,16 @@ The Hill biodiversity index accounts for species’ relative abundance (number o
 
 Warning: The Simpson index has the same assumptions as the Shannon index.
 
+They are calculated as shown below:
+     - $$ hill_1   = exp(shannon) $$
+     - $$ hill_2   = 1 / simpson $$
+     - $$ hill_inf = 1 / maxp $$
+
 
 # Conclusion
 
-You also have a tabular that sums up each indicators according to the locations of th data.
+You also have a tabular that sums up each indicators.
 ![Tabular](../../images/obisindicators/index.png "Tabular")
 You are now all set to use your obis data in order to do a diversity analysis. 
-
+Nb: the column sp is the count of the number of observations in a dataset. It is  the number of records in the dataset.
 
