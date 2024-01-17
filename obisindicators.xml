@@ -6,18 +6,15 @@
     <expand macro="topic"/>
     <expand macro="requirements">
         <requirement type="package" version="2.0.3">r-magrittr</requirement>
-        <requirement type="package" version="1.0.9">r-dplyr</requirement>
+        <requirement type="package" version="1.0.10">r-dplyr</requirement>
         <requirement type="package" version="1.0_7">r-sf</requirement>
         <requirement type="package" version="2.1_7.1">r-gsl</requirement>
         <requirement type="package" version="0.1.0">r-rnaturalearth</requirement>
         <requirement type="package" version="0.1.0">r-rnaturalearthdata</requirement>
         <requirement type="package" version="0.6.2">r-viridis</requirement>
-        <requirement type="package" version="2.4.2">r-remotes</requirement>
-        <requirement type="package" version="2.0.4">r-dggridr</requirement>
+        <requirement type="package" version="3.0.0">r-dggridr</requirement>
     </expand>
     <required_files>
-        <include type="literal" path="test-data/occ_at.tabular"/>
-        <include type="literal" path="test-data/Index.csv"/>
         <include type="literal" path="analyze.r"/>
         <include type="literal" path="visualize.r"/>
         <include type="literal" path="data.r"/>
@@ -34,6 +31,7 @@
             '$species'
             '$records'
             '$type'
+            '$resolution'
             '$__tool_directory__/analyze.r'
             '$__tool_directory__/visualize.r'
             '$__tool_directory__/data.r'
@@ -42,10 +40,10 @@
         ]]>
     </command>
     <inputs>
-        <expand macro="SRS_input"/>
+        <expand macro="obis_input"/>
         <param name="separator" type="select" display="radio" label="What character is the separator in your data? (Mostlikely a comma for a csv file and t for a tabular)">
+            <option value="t">Tabulator (\t)</option>                 
             <option value=",">Comma (,)</option>  
-            <option value="t">Tabulator (\t)</option>     
         </param> 
         <param name="longitude" label="Select column containing the decimal value of the longitude " type="data_column" data_ref="input" numerical="true" use_header_names="true"/>
         <param name="latitude" label="Select column containing the decimal value of the latitude " type="data_column" data_ref="input" numerical="true" use_header_names="true"/>
@@ -55,6 +53,7 @@
             <option value="0">Robinson projection</option>
             <option value="4326">Geographic projection</option>
         </param>
+        <param name="resolution" type="integer" value="9" min="1" max="30" label="Choose a resolution for the discrete global grid (a number between 1, low resolution, and 30, high resolution)" data_ref="input" help="We strongly advise to stay below 15 or else you won't see a thing. The bigger your dataset is the smaller the resolution should be."/>
     </inputs>
     <outputs>
         <data name="output_index" from_work_dir="Index.csv" format="csv" label="Index">
@@ -73,6 +72,7 @@
             <param name="species" value="c3: species"/>
             <param name="records" value="c5: records"/>
             <param name="type" value="0"/>
+            <param name="resolution" value="9"/>
             <output name="output_index" value="Index.csv"/>
             <output_collection name="plots" type="list" count="5">
                 <element name="ES_50" ftype="png">
@@ -132,5 +132,5 @@ A tabular file with observation data. Must at least contain four columns longitu
 
 - Multiple PNG files representing the indicators on a map (according to the choice of map made).
     ]]></help>
-    <expand macro="SRS_bibref"/>
+    <expand macro="obis_bibref"/>
 </tool>
