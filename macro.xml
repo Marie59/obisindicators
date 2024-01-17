@@ -1,9 +1,9 @@
 <macros>
-    <token name="@VERSION@">0.0.1</token>
+    <token name="@VERSION@">0.0.2</token>
     <xml name="requirements">
         <requirements>
-            <requirement type="package" version="4.2.1">r-base</requirement>
-            <requirement type="package" version="3.3.6">r-ggplot2</requirement>
+            <requirement type="package" version="4.2.2">r-base</requirement>
+            <requirement type="package" version="3.4.0">r-ggplot2</requirement>
             <yield />
         </requirements>
     </xml>
@@ -12,8 +12,8 @@
        <param name="colnames" type="boolean" label="First line is a header line" checked="true"/>
        <param name="separator" type="text" label="What character is the separator in your data? (Mostlikely a comma for a csv file and t for a tabular)"/>
     </xml>
-    <xml name="SRS_bibref">
-       <citations>
+    <xml name="obis_bibref">
+        <citations>
             <citation type="bibtex">
             @Manual{,
             title = {obisindicators: Develop marine biodiversity indicators from OBIS data},
@@ -25,6 +25,11 @@
             </citation>
         </citations>
     </xml>
+    <xml name="obis_doiref">
+        <citations>
+            <citation type="doi">DOI:10.5281/zenodo.6969395</citation>
+        </citations>
+    </xml>
     <xml name="topic">
         <edam_topics>
            <edam_topic>topic_0610</edam_topic>
@@ -32,4 +37,3 @@
         </edam_topics>
     </xml>
 </macros>
-
